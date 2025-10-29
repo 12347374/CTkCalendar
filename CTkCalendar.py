@@ -207,19 +207,6 @@ class CTkCalendar(ctk.CTkFrame):
         self.calendar_view.change_year(delta)
 
 
-    # --- Eventos ---
-    def add_event(self, date_obj: datetime.date, name: str, desc: str, color: str):
-        return self.event_manager.add_event(date_obj, name, desc, color)
-
-    def add_event_range(self, start_date: datetime.date, end_date: datetime.date, name: str, desc: str, color: str):
-        return self.event_manager.add_event_range(start_date, end_date, name, desc, color)
-
-    def remove_event(self, date_obj: datetime.date, name: str):
-        return self.event_manager.remove_event(date_obj, name)
-    
-    def get_events(self, date_obj: datetime.date):
-        return self.event_manager.get_events(date_obj)
-
     # --- Visuales ---
     def _suspend_redraw(self):
         """Congela los repintados de widgets del calendario y header."""
@@ -234,27 +221,3 @@ class CTkCalendar(ctk.CTkFrame):
         self.days_frame.grid_propagate(True)
         self.update_idletasks()
 
-
-if __name__ == '__main__':
-    import datetime
-    ctk.set_appearance_mode('light')
-    app=ctk.CTk()
-    app.geometry('800x600')
-
-    cal = CTkCalendar(
-        master=app,
-        # header_color='#2D66CA',
-        # fg_color='#407EE4',
-        # header_hover_color='#214C97',
-        locale='es',
-        #selected_day_border_color='#407EE4'
-    )
-    cal.pack(expand=True, fill='both')
-
-    cal.add_event(date_obj=datetime.date(2025, 10, 28), name='Coco - Gustavo', desc='depto ocupado',color='red2')
-    cal.add_event(date_obj=datetime.date(2025, 10, 28), name='Pepe - Andrea', desc='depto ocupado',color='green3')
-
-    cal.add_event_range(start_date=datetime.date(2025, 11, 1), end_date=datetime.date(2025, 11, 7), name='Eco - Pepito', color='violet', desc='')
-
-
-    app.mainloop()
